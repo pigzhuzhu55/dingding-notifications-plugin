@@ -25,6 +25,8 @@ public class DingdingServiceImpl implements DingdingService {
 
     private String jenkinsURL;
 
+    private String projectName;
+
     private boolean onStart;
 
     private boolean onSuccess;
@@ -41,8 +43,9 @@ public class DingdingServiceImpl implements DingdingService {
 
     private String api;
 
-    public DingdingServiceImpl(String jenkinsURL, String token, boolean onStart, boolean onSuccess, boolean onFailed, boolean onAbort, TaskListener listener, AbstractBuild build) {
+    public DingdingServiceImpl(String jenkinsURL,String projectName, String token, boolean onStart, boolean onSuccess, boolean onFailed, boolean onAbort, TaskListener listener, AbstractBuild build) {
         this.jenkinsURL = jenkinsURL;
+        this.projectName= projectName;
         this.onStart = onStart;
         this.onSuccess = onSuccess;
         this.onFailed = onFailed;
@@ -55,8 +58,8 @@ public class DingdingServiceImpl implements DingdingService {
     @Override
     public void start() {
         String pic = "http://icon-park.com/imagefiles/loading7_gray.gif";
-        String title = String.format("%s%s开始构建", build.getProject().getDisplayName(), build.getDisplayName());
-        String content = String.format("项目[%s%s]开始构建", build.getProject().getDisplayName(), build.getDisplayName());
+        String title = String.format("听说：[%s] 开始发布p(^_^)q",this.projectName);
+        String content = String.format("版本[%s%s]开始发布", build.getProject().getDisplayName(), build.getDisplayName());
 
         String link = getBuildUrl();
         if (onStart) {
@@ -77,8 +80,8 @@ public class DingdingServiceImpl implements DingdingService {
     @Override
     public void success() {
         String pic = "http://icons.iconarchive.com/icons/paomedia/small-n-flat/1024/sign-check-icon.png";
-        String title = String.format("%s%s构建成功", build.getProject().getDisplayName(), build.getDisplayName());
-        String content = String.format("项目[%s%s]构建成功, summary:%s, duration:%s", build.getProject().getDisplayName(), build.getDisplayName(), build.getBuildStatusSummary().message, build.getDurationString());
+        String title = String.format("插播一条广告：[%s] 发布成功\\(^ 0^)/",this.projectName);
+        String content = String.format("版本[%s%s]发布成功, summary:%s, duration:%s", build.getProject().getDisplayName(), build.getDisplayName(), build.getBuildStatusSummary().message, build.getDurationString());
 
         String link = getBuildUrl();
         logger.info(link);
@@ -91,8 +94,8 @@ public class DingdingServiceImpl implements DingdingService {
     @Override
     public void failed() {
         String pic = "http://www.iconsdb.com/icons/preview/soylent-red/x-mark-3-xxl.png";
-        String title = String.format("%s%s构建失败", build.getProject().getDisplayName(), build.getDisplayName());
-        String content = String.format("项目[%s%s]构建失败, summary:%s, duration:%s", build.getProject().getDisplayName(), build.getDisplayName(), build.getBuildStatusSummary().message, build.getDurationString());
+        String title = String.format("紧急情况：[%s] 发布失败⊙﹏⊙∥∣°",this.projectName);
+        String content = String.format("版本[%s%s]构建失败, summary:%s, duration:%s", build.getProject().getDisplayName(), build.getDisplayName(), build.getBuildStatusSummary().message, build.getDurationString());
 
         String link = getBuildUrl();
         logger.info(link);
@@ -105,8 +108,8 @@ public class DingdingServiceImpl implements DingdingService {
     @Override
     public void abort() {
         String pic = "http://www.iconsdb.com/icons/preview/soylent-red/x-mark-3-xxl.png";
-        String title = String.format("%s%s构建中断", build.getProject().getDisplayName(), build.getDisplayName());
-        String content = String.format("项目[%s%s]构建中断, summary:%s, duration:%s", build.getProject().getDisplayName(), build.getDisplayName(), build.getBuildStatusSummary().message, build.getDurationString());
+        String title = String.format("意外啊：[%s] 发布中断(－_－)y--~~",this.projectName);
+        String content = String.format("版本[%s%s]发布中断, summary:%s, duration:%s", build.getProject().getDisplayName(), build.getDisplayName(), build.getBuildStatusSummary().message, build.getDurationString());
 
         String link = getBuildUrl();
         logger.info(link);

@@ -10,6 +10,10 @@
     <f:textbox default="${descriptor.getDefaultURL()}" />
   </f:entry>
 
+  <f:entry title="项目名称" field="projectName">
+    <f:textbox default="${descriptor.getProjectName()}" />
+  </f:entry>
+
   <f:entry title="钉钉access token" field="accessToken">
     <f:textbox  />
   </f:entry>
