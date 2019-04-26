@@ -14,6 +14,10 @@
     <f:textbox default="${descriptor.getProjectName()}" />
   </f:entry>
 
+    <f:entry title="项目测试主页" field="webSite">
+      <f:textbox default="${descriptor.getWebSite()}" />
+    </f:entry>
+
   <f:entry title="钉钉access token" field="accessToken">
     <f:textbox  />
   </f:entry>

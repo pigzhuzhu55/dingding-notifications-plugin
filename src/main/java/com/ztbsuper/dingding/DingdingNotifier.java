@@ -21,6 +21,11 @@ import java.io.IOException;
  */
 public class DingdingNotifier extends Notifier {
 
+    private String webSite;
+    public String getWebSite() {
+        return webSite;
+    }
+
     private String accessToken;
 
     private String projectName;
@@ -64,7 +69,8 @@ public class DingdingNotifier extends Notifier {
     }
 
     @DataBoundConstructor
-    public DingdingNotifier(String accessToken, boolean onStart, boolean onSuccess, boolean onFailed, boolean onAbort, String jenkinsURL,String projectName) {
+    public DingdingNotifier(String accessToken, boolean onStart, boolean onSuccess, boolean onFailed,
+                            boolean onAbort, String jenkinsURL,String projectName,String webSite) {
         super();
         this.accessToken = accessToken;
         this.onStart = onStart;
@@ -73,10 +79,11 @@ public class DingdingNotifier extends Notifier {
         this.onAbort = onAbort;
         this.jenkinsURL = jenkinsURL;
         this.projectName = projectName;
+        this.webSite = webSite;
     }
 
     public DingdingService newDingdingService(AbstractBuild build, TaskListener listener) {
-        return new DingdingServiceImpl(jenkinsURL,projectName, accessToken, onStart, onSuccess, onFailed, onAbort, listener, build);
+        return new DingdingServiceImpl(jenkinsURL,projectName,webSite, accessToken, onStart, onSuccess, onFailed, onAbort, listener, build);
     }
 
     @Override
